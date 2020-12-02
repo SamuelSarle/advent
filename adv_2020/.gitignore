@@ -25,3 +25,5 @@ adv_2020-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+input/
