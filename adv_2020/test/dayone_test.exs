@@ -12,4 +12,8 @@ defmodule DayoneTest do
   test "input with no matching pairs returns nil" do
     assert DayOne.solve([1721, 979, 366, 675, 1456]) == :nil
   end
+
+  test "3-dimensional returns correct answer" do
+    assert DayOne.solve([1721, 979, 366, 299, 675, 1456], 3) == 241861950
+  end
 end
