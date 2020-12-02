@@ -5,10 +5,13 @@ defmodule DayTwo do
   def solve(list) do
     list
     |> Stream.map(&interpret_params/1)
-    |> Enum.map(&check_pass/1)
-    |> Enum.count(fn x -> x == true end)
+    |> Stream.map(&check_pass/1)
+    |> Enum.count(& &1)
   end
 
+  @doc """
+  Checks that character appears in password min < count < max times.
+  """
   defp check_pass({min, _, _, ""}) when min > 0, do: false
 
   defp check_pass({min, max, char, pass}) do
