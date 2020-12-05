@@ -1,4 +1,8 @@
 defmodule DayThree do
+  @doc """
+  Traverses the cartesian map with a slope (default 3, 1), returns count
+  of trees met on the way.
+  """
   def solve(input, slope \\ {3, 1}) do
     traverse(input, slope)
   end
@@ -17,6 +21,7 @@ defmodule DayThree do
   When Y passes the end the operation is complete and the accumulator is retured.
   """
   defp _traverse(_, _, height, acc, _, y, _, _) when y > height - 1, do: acc
+
   defp _traverse(area, width, height, acc, x, y, d_x, d_y) when x > width - 1 do
     _traverse(area, width, height, acc, x - width, y, d_x, d_y)
   end
