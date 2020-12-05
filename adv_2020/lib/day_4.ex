@@ -2,8 +2,8 @@ defmodule DayFour do
   def solve(input) do
     input
     |> String.split("\n\n", trim: true)
-    |> Enum.map(&construct_passport/1)
-    |> Enum.map(&validate_passport/1)
+    |> Stream.map(&construct_passport/1)
+    |> Stream.map(&validate_passport/1)
     |> Enum.count(& &1)
   end
 
@@ -52,7 +52,8 @@ defmodule DayFour do
   defp validate_eyr(_), do: :error
 
   defp validate_hgt(hgt) do
-    {h, units} = Integer.parse(hgt) # greedy, leaves the rest of the string as the unit
+    # greedy, leaves the rest of the string as the unit
+    {h, units} = Integer.parse(hgt)
 
     cond do
       units == "cm" and h >= 150 and h <= 193 -> :ok
