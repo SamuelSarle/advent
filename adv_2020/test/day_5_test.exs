@@ -15,4 +15,14 @@ defmodule DayFiveTest do
 
     assert DayFive.solve(input) == 820
   end
+
+  test "returns missing seat ID" do
+    input = [
+      "BFFFBFFRLR",
+      "BFFFBFFLRR",
+      "BFFFBFFLRL"
+    ]
+
+    assert DayFive.missing_seat(input) == 548
+  end
 end
