@@ -21,5 +21,6 @@ defmodule DaySixTest do
     """
 
     assert DaySix.solve(input) == 11
+    assert DaySix.common_answers(input) == 6
   end
 end
