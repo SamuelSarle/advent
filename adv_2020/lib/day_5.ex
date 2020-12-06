@@ -43,9 +43,9 @@ defmodule DayFive do
   defp _seat_row(acc, <<>>), do: acc
 
   defp _seat_row(acc, <<x, rest::binary>>) when is_bitstring(acc) do
-    cond do
-      <<x>> == "B" -> _seat_row(<<acc::bitstring, 1::1>>, rest)
-      <<x>> == "F" -> _seat_row(<<acc::bitstring, 0::1>>, rest)
+    case <<x>> do
+      "B" -> _seat_row(<<acc::bitstring, 1::1>>, rest)
+      "F" -> _seat_row(<<acc::bitstring, 0::1>>, rest)
     end
   end
 
@@ -57,9 +57,9 @@ defmodule DayFive do
   defp _seat_col(acc, <<>>), do: acc
 
   defp _seat_col(acc, <<x, rest::binary>>) when is_bitstring(acc) do
-    cond do
-      <<x>> == "R" -> _seat_col(<<acc::bitstring, 1::1>>, rest)
-      <<x>> == "L" -> _seat_col(<<acc::bitstring, 0::1>>, rest)
+    case <<x>> do
+      "R" -> _seat_col(<<acc::bitstring, 1::1>>, rest)
+      "L" -> _seat_col(<<acc::bitstring, 0::1>>, rest)
     end
   end
 end
