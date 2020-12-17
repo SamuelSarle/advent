@@ -28,4 +28,43 @@ defmodule DayNine do
       end
     end)
   end
+
+  defmodule PartTwo do
+    def solve(input, opts \\ []) do
+      target = DayNine.solve(input, opts)
+
+      input =
+        input
+        |> String.split("\n", trim: true)
+        |> Enum.map(&String.to_integer(&1))
+
+      find_matching_seq(input, target)
+    end
+
+    defp find_matching_seq(data, target) do
+      _find_matching_seq(data, target, Enum.count(data), 2)
+    end
+
+    defp _find_matching_seq(_, _, data_len, len) when len >= data_len, do: nil
+
+    # chunks the input according to len, if a chunk with sum of target exists, returns it
+    defp _find_matching_seq(data, target, data_len, len) do
+      case data
+           |> Stream.chunk_every(len, 1, :discard)
+           # check that each element is less than target
+           |> Stream.filter(fn x -> x |> Enum.all?(&(&1 < target)) end)
+           |> Enum.reduce_while([], fn
+             chunk, _ ->
+               if chunk |> Enum.sum() == target do
+                 {:halt, chunk}
+               else
+                 {:cont, []}
+               end
+           end)
+           |> Enum.min_max(fn -> {nil, nil} end) do
+        {nil, nil} -> _find_matching_seq(data, target, data_len, len + 1)
+        {min, max} -> min + max
+      end
+    end
+  end
 end
