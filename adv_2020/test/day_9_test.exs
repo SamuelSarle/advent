@@ -28,7 +28,6 @@ defmodule DayNineTest do
     assert DayNine.solve(input, preamble: 5) == 127
   end
 
-
   test "part two returns correct answer" do
     input = """
     35
