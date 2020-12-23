@@ -17,6 +17,7 @@ defmodule DayTenTest do
     """
 
     assert DayTen.solve(input) == 35
+    assert DayTen.PartTwo.solve(input) == 8
   end
 
   test "larger input returns correct answer" do
@@ -55,5 +56,7 @@ defmodule DayTenTest do
     """
 
     assert DayTen.solve(input) == 220
+    assert DayTen.PartTwo.solve(input) == 19208
   end
+
 end
