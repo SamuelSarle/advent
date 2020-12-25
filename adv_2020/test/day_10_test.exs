@@ -58,5 +58,4 @@ defmodule DayTenTest do
     assert DayTen.solve(input) == 220
     assert DayTen.PartTwo.solve(input) == 19208
   end
-
 end
