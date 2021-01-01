@@ -11,5 +11,6 @@ defmodule DayTwelveTest do
     """
 
     assert DayTwelve.solve(input) == 25
+    assert DayTwelve.PartTwo.solve(input) == 286
   end
 end
