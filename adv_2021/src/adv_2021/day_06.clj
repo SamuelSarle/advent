@@ -3,28 +3,34 @@
    [adv-2021.core :refer [get-input]]
    [clojure.string :as str]))
 
-(def total
-  (memoize
-   (fn [n turns]
-     (cond
-       (= 0 turns) 1
-       (= 0 n) (+' (total 6 (dec turns))
-                   (total 8 (dec turns)))
-       :else (recur (dec n) (dec turns))))))
+(defn step
+  [[new-fishes & other]]
+  (update (conj (vec other) new-fishes) 6 (partial +' new-fishes)))
+
+(defn total
+  [fishes turns]
+  (apply +' (nth (iterate step fishes) turns)))
+
+(defn start-counts
+  [input]
+  (let [counts (into (sorted-map) (for [x (range 9)] [x 0]))]
+    (->> (str/split input #",")
+         (map #(Integer/parseInt %))
+         frequencies
+         (into counts)
+         (mapv val))))
 
 (defn solve-1
   [input]
-  (->> (str/split input #",")
-       (map #(Integer/parseInt %))
-       (map #(total % 80))
-       (apply +)))
+  (-> input
+      start-counts
+      (total 80)))
 
 (defn solve-2
   [input]
-  (->> (str/split input #",")
-       (map #(Integer/parseInt %))
-       (map #(total % 256))
-       (apply +)))
+  (-> input
+      start-counts
+      (total 256)))
 
 (comment
   (solve-1 (get-input 6))
